@@ -32,7 +32,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/home1';
 
     /**
      * Create a new controller instance.
@@ -46,10 +46,10 @@ class LoginController extends Controller
         foreach ($listCategories as $category) {
             $category['subCategories'] = Category::where('parent_id', $category->id)->get();
         }
-        $dumpProductId = DumpProduct::all()->pluck('product_id')->toArray();
-        $product = Product::whereIn('id', $dumpProductId)->with(['images', 'dumpProducts'])->get();
-        view()->share('productsInCart', $product);
-        view()->share('listCategories', $listCategories);
+        // $dumpProductId = DumpProduct::all()->pluck('product_id')->toArray();
+        // $product = Product::whereIn('id', $dumpProductId)->with(['images', 'dumpProducts'])->get();
+        // view()->share('productsInCart', $product);
+        // view()->share('listCategories', $listCategories);
         $this->middleware('guest')->except('logout');
     }
 
@@ -71,15 +71,7 @@ class LoginController extends Controller
         return redirect('/');
     }
 
-    public function showRegistrationForm()
-    {
-         $listCategories = Category::where('parent_id',0)->get();
-         foreach ($listCategories as $category) {
-            $category['subCategories'] = Category::where('parent_id', $category->id)->get();
-         }
 
-         return view('auth.register',compact('listCategories'));
-    }
 
 
 }

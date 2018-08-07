@@ -13,7 +13,7 @@ use App\CategoryProduct;
 use Illuminate\Http\Request;
 use App\DumpProduct;
 use App\User;
-use App\Order;
+use App\Cart;
 use App\Payment;
 
 
@@ -26,20 +26,31 @@ class PageController extends Controller
         foreach ($listCategories as $category) {
             $category['subCategories'] = Category::where('parent_id', $category->id)->get();
         }
-        $dumpProductId = DumpProduct::all()->pluck('product_id')->toArray();
-        $product = Product::whereIn('id', $dumpProductId)->with(['images', 'dumpProducts'])->get();
-        view()->share('productsInCart', $product);
+        $dumpProductId = Cart::with([
+            'product' => function($q){
+                $q->with(['images' => function($q){
+                    $q->get();
+                }])->get();
+            }])->get();
+        //dd($dumpProductId);
+
+        // $product = Product::whereIn('id', $dumpProductId)->with(['images', 'dumpProducts'])->['products'=>function($query) {
+        //     $query->with('images')->get();
+        // }])->get();
+        view()->share('productsInCart', $dumpProductId);
         view()->share('listCategories', $listCategories);
 
     }
 
     public  function home()
     {
+
         return view('home');
     }
 
     public  function home1()
     {
+
         $categories = Category::withImages();
 
         return view('home1', compact('categories', 'listCategories'));
@@ -55,16 +66,19 @@ class PageController extends Controller
 
     public  function shop()
     {
+
         return view('shop-grid');
     }
 
     public  function shoplist()
     {
+
         return view('shoplist');
     }
 
     public  function blog()
     {
+
         $posts = Post::paginate(4);
 
         return view('blog', compact('posts'));
@@ -72,6 +86,7 @@ class PageController extends Controller
 
     public  function shoppingcart()
     {
+
         return view('cart');
     }
 
@@ -82,7 +97,7 @@ class PageController extends Controller
 
     public function addToCart(Request $req)
     {
-        $dumpProduct = new DumpProduct();
+        $dumpProduct = new Cart();
         try {
             $product = $dumpProduct->where('product_id', $req->addToCart)->firstOrFail();
             $product->soluong += isset($req->soluong) ? $req->soluong : 1;
@@ -98,8 +113,8 @@ class PageController extends Controller
 
     public function delete($id)
     {
-        $delcate = DumpProduct::where('product_id',$id)->delete();
-
+        $delcate = Cart::where('product_id',$id)->delete();
+        //dd(DumpProduct::where('product_id',$id));
         return back();
     }
 

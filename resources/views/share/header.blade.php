@@ -63,27 +63,35 @@
                                             <div class="basket"><a class="basket-icon" href="#"><i class="fa fa-shopping-basket"></i> {{ __('ShoppingCart') }} <span>3</span></a>
                                                 <div class="top-cart-content">
                                                     <div class="block-subtitle">
-                                                        <div class="top-subtotal">3 items,
-                                                            <span class="price">$399.49</span>
+                                                        <div class="top-subtotal">3 items
                                                         </div>
                                                     </div>
                                                     <ul class="mini-products-list" id="cart-sidebar">
-                                                        @foreach($productsInCart as $key => $item)
+                                                        @foreach($productsInCart as $item)
                                                         <li class="item">
                                                             <div class="item-inner">
                                                                 <a class="product-image" title="product tilte is here" href="product-detail.html">
-                                                                    <img alt="product tilte is here" src="{{ asset('images/products/') }}/{{ $item->images[0]->link }}">
+                                                                   @foreach($item->product->images as $img)
+                                                                        @if($img->link != null)
+                                                                            <img alt="product tilte is here" src="{{ asset('images/products/') }}/{{ $img->link}}">
+                                                                        @else
+                                                                            <img alt="Product tilte is here" src="images/products/default.png">
+                                                                        @endif
+                                                                    @endforeach
                                                                 </a>
                                                                 <div class="product-details">
                                                                     <div class="access">
-                                                                        <a class="btn-remove1" name ="removeinterm" title="Remove This Item" href=" {{ route('deletecate', ['id' => $item->id]) }}">{{ __('Remove') }}</a>
+                                                                        <a class="btn-remove1" name ="removeinterm" title="Remove This Item" href=" {{ route('deletecart', ['id' =>  $item->product->id]) }}">{{ __('Remove') }}</a>
                                                                         <a class="btn-edit" title="Edit item" href="#">
                                                                             <i class="fa fa-pencil"></i>
                                                                             <span class="hidden">{{ __('Edititem') }}</span>
                                                                         </a>
                                                                     </div>
-                                                                    <p class="product-name"><a href="product-detail.html">{{ $item->name }}</a></p>
-                                                                    <strong>{{ $item->dumpProducts[0]->soluong }}</strong> x <span class="price">{{ $item->price }}</span>
+                                                                    <p class="product-name">
+                                                                        <a href="product-detail.html">{{ $item->product->name }}</a>
+                                                                    </p>
+                                                                    <strong>{{ $item->soluong }}</strong> x
+                                                                    <span class="price">{{ $item->product->price }}</span>
                                                                 </div>
                                                             </div>
                                                         </li>

@@ -38,6 +38,10 @@ class Product extends Model
         return $this->hasMany(DumpProduct::class);
     }
 
+     public function Carts ()
+    {
+        return $this->hasMany(Cart::class);
+    }
 
     public function scopeResult($query)
     {

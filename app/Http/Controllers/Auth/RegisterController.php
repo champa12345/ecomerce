@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+
 class RegisterController extends Controller
 {
     /*
@@ -39,21 +40,13 @@ class RegisterController extends Controller
      */
     public function __construct(Request $req)
     {
-        $this->middleware('guest');
-        $dumpProduct = new DumpProduct();
-        try {
-            $product = $dumpProduct->where('product_id', $req->addToCart)->firstOrFail();
-            $product->soluong += isset($req->soluong) ? $req->soluong : 1;
-            $product->save();
-        } catch (ModelNotFoundException $e) {
-            $dumpProduct->product_id = $req->addToCart;
-            $dumpProduct->soluong = isset($req->soluong) ? $req->soluong : 1;
-            $dumpProduct->save();
-        }
 
+        $this->middleware('guest');
         return back();
 
     }
+
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -94,4 +87,5 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
 }

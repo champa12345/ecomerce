@@ -17,7 +17,7 @@
                                             <div class="item-img">
                                                 <div class="item-img-info">
                                                     <a class="product-image" title="Product tilte is here" href="">
-                                                        @if(isset($sp2->images))
+                                                        @if(empty($sp2->images))
                                                             <img alt="Product tilte is here" src="{{ asset('images/products/' . $sp2->images[0]->link) }}">
                                                         @else
                                                               <img alt="Product tilte is here" src="images/products/product-fashion-14.jpg">
@@ -59,6 +59,7 @@
                                                                 @endif
                                                             </div>
                                                         </div>
+                                                        <form></form>
                                                         <div class="actions">
                                                             <div class="add_cart">
                                                                 {!! Form::open([

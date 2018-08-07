@@ -49,20 +49,24 @@
 													<tbody>
 														@foreach($productsInCart as $key => $item)
 														<tr class="cart_item">
-
 															<td class="item-img">
-																<a href="#">
-																	<img src="{{ asset('images/products/') }}/{{ $item->images[0]->link }}" alt="Product tilte is here ">
-																</a>
+
+																  @foreach($item->product->images as $img)
+                                                                        @if($img->link != null)
+                                                                            <img alt="product tilte is here" src="{{ asset('images/products/') }}/{{ $img->link}}">
+                                                                        @else
+                                                                            <img alt="Product tilte is here" src="images/products/default.png">
+                                                                        @endif
+                                                                    @endforeach
 															</td>
-															<td class="item-title"><a href="#">{{ $item->name }} </a></td>
-															<td class="item-price">{{ number_format($item->price) }} </td>
+															<td class="item-title"><a href="#">{{ $item->product->name }} </a></td>
+															<td class="item-price">{{ number_format($item->product->price) }} </td>
 															<td class="item-qty">
-																{{ $item->dumpProducts[0]->soluong }}
+																{{ $item->soluong }}
 															</td>
-															<td class="total-price"><strong>{{ number_format($item->dumpProducts[0]->soluong * $item->price)  }}</strong></td>
+															<td class="total-price"><strong>{{ number_format($item->soluong * $item->product->price)  }}</strong></td>
 															<td class="remove-item">
-																<a href="{{route('deletecate', ['id' => $item->id]) }}">
+																<a href="{{route('deletecart', ['id' => $item->id]) }}">
 																	<i class="fa fa-trash-o"></i>
 																</a>
 															</td>
@@ -174,7 +178,7 @@
 																				</div>
 																			</div>
 																		</div>
-																			@endif
+																	@endif
 
 																</div>
 															</div>
@@ -205,9 +209,9 @@
 																	?>
 																	@foreach($productsInCart as $key => $item)
 																	<tr class="cart_item check-item prd-name">
-																		<td class="ctg-type"> {{ $item->name }} × <span>{{ $item->dumpProducts[0]->soluong }}</span></td>
-																		<td class="cgt-des">{{ number_format($item->dumpProducts[0]->soluong * $item->price) }}
-																		<?php $total += $item->dumpProducts[0]->soluong * $item->price ;
+																		<td class="ctg-type"> {{ $item->product->name }} × <span>{{ $item->soluong }}</span></td>
+																		<td class="cgt-des">{{ number_format($item->soluong * $item->product->price) }}
+																		<?php $total += $item->soluong * $item->price ;
 																		?>
 																		</td>
 																	</tr>
