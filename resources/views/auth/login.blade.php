@@ -1,5 +1,4 @@
 @extends('master')
-
 @section('content')
 <div class="content-wrapper bg-color">
     <div class="row">

@@ -6,7 +6,8 @@
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet"  href="{{ asset('css/styles.css') }}" media="all">
-    <link rel="stylesheet"  href="{{ asset('css/style1.css') }}" media="all">
+    <link rel="stylesheet"  href="{{ asset('css/styles1.css') }}" media="all">
+
 </head>
 
 <body class="cms-index-index cms-home-page">
@@ -26,6 +27,7 @@
     <script src="{!! asset('js/main.js') !!}"></script>
     <script src="{!! asset('js/owl.carousel.min.js') !!}"></script>
     <script src="{!! asset('js/mob-menu.js') !!}"></script>
+    <script src="{!! asset('js/abc.js') !!}"></script>
     <script src="{!! asset('js/countdown.js') !!}"></script>
 </body>
 </html>

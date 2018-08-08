@@ -54,9 +54,9 @@
 							<div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
 							<div class="price-block">
 								<div class="price-box">
-									<p class="special-price"> <span class="price-label">Special Price</span><span class="price">{{$product->price}}</span></p>
+									<p class="special-price"> <span class="price-label">Special Price</span><span class="price">{{ number_format($product->price) }}</span></p>
 									<p class="old-price"> <span class="price-label">Regular Price:</span><span class="price"> $299.99 </span></p>
-
+									@if()
 									<p class="availability in-stock"><span>In Stock</span></p>
 								</div>
 							</div>

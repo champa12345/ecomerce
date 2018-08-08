@@ -15,6 +15,7 @@ use App\DumpProduct;
 use App\User;
 use App\Cart;
 use App\Payment;
+use App\Order;
 
 
 
@@ -22,23 +23,7 @@ class PageController extends Controller
 {
      public function __construct(Request $req)
     {
-        $listCategories = Category::where('parent_id', 0)->get();
-        foreach ($listCategories as $category) {
-            $category['subCategories'] = Category::where('parent_id', $category->id)->get();
-        }
-        $dumpProductId = Cart::with([
-            'product' => function($q){
-                $q->with(['images' => function($q){
-                    $q->get();
-                }])->get();
-            }])->get();
-        //dd($dumpProductId);
 
-        // $product = Product::whereIn('id', $dumpProductId)->with(['images', 'dumpProducts'])->['products'=>function($query) {
-        //     $query->with('images')->get();
-        // }])->get();
-        view()->share('productsInCart', $dumpProductId);
-        view()->share('listCategories', $listCategories);
 
     }
 
@@ -53,12 +38,14 @@ class PageController extends Controller
 
         $categories = Category::withImages();
 
+        // $slider = Slider::with('images')->get();
+        // dd($slider);
+
         return view('home1', compact('categories', 'listCategories'));
     }
 
     public function showcate($id)
     {
-
         $subcate = Category::WithImages($id);
 
         return view('showcate', compact('subcate', 'listCategories', 'categories'));

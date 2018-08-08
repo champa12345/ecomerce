@@ -1,17 +1,61 @@
 @extends('master')
 @section('title','home')
 @section('content')
+ <div class="container jtv-home-revslider">
+    <div class="row">
+      <div class="col-lg-9 col-sm-9 col-xs-12 jtv-main-home-slider">
+        <div id='rev_slider_1_wrapper' class='rev_slider_wrapper fullwidthbanner-container'>
+          <div id='rev_slider_1' class='rev_slider fullwidthabanner'>
+            <ul>
+              <li data-transition='slotzoom-horizontal' data-slotamount='7' data-masterspeed='1000' data-thumb='images/slider/slide-img1.jpg'>
+                <img src='images/slider/slide-img1.jpg' alt="slider image1" data-bgposition='left top'  data-bgfit='cover' data-bgrepeat='no-repeat'  />
+                <div class="info">
+                  <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-x='0'  data-y='165'  data-endspeed='500'  data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2;white-space:nowrap;'>
+                    <span>Shop The Trend</span>
+                  </div>
+                  <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-x='0'  data-y='220'  data-endspeed='500'  data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;white-space:nowrap;'>Amazing Chance!
+                  </div>
+                  <div class='tp-caption Title sft  tp-resizeme ' data-x='0'  data-y='300'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;white-space:nowrap;'>Our new arrivals can't wait to meet you.</div>
+                  <div class='tp-caption sfb  tp-resizeme ' data-x='0'  data-y='350'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;white-space:nowrap;'>
+                    <a href='#' class="buy-btn">Browse Now</a>
+                </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+        <div class="banner-block"> <a href="#"> <img src="images/banner1.jpg" alt=""> </a>
+          <div class="text-des-container pad-zero">
+            <div class="text-des">
+              <p>Designer</p>
+              <h2>Handbags</h2>
+            </div>
+          </div>
+        </div>
+        <div class="banner-block"> <a href="#"> <img src="images/banner2.jpg" alt=""> </a>
+          <div class="text-des-container">
+            <div class="text-des">
+              <p>The Ultimate</p>
+              <h2>Shoes Collection</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
 <section class="main-container">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-xs-12">
                 @foreach($categories as $sp1)
                 <div class="col-main">
+                    @foreach($sp1->products as $sp2)
                     <div class="jtv-featured-products">
                         <div class="slider-items-products">
                             <div id="featured-slider" class="product-flexslider hidden-buttons">
                                 <div class="slider-items slider-width-col4 products-grid">
-                                    @foreach($sp1->products as $sp2)
                                     <div class="item">
                                         <div class="item-inner">
                                             <div class="item-img">
@@ -20,7 +64,7 @@
                                                         @if(empty($sp2->images))
                                                             <img alt="Product tilte is here" src="{{ asset('images/products/' . $sp2->images[0]->link) }}">
                                                         @else
-                                                              <img alt="Product tilte is here" src="images/products/product-fashion-14.jpg">
+                                                              <img alt="Product tilte is here" src="images/products/default.png">
                                                         @endif
                                                     </a>
                                                     <div class="new-label new-top-left">new</div>
@@ -77,11 +121,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
                 @endforeach
             </div>

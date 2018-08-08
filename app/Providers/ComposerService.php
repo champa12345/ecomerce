@@ -3,29 +3,27 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\View;
 
-class AppServiceProvider extends ServiceProvider
+class ComposerService extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
+        view()->composer('*', 'App\Http\ViewComposers\CategoryComposer');
+        view()->composer('*', 'App\Http\ViewComposers\ProductsInCartComposer');
     }
 
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
     public function register()
     {
         //
-
     }
 }

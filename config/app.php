@@ -160,7 +160,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
-
+        App\Providers\ComposerService::class,
         //Collective
         Collective\Html\HtmlServiceProvider::class,
 

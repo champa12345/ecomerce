@@ -42,28 +42,9 @@ class LoginController extends Controller
 
     public function __construct(Request $req)
     {
-        $listCategories = Category::where('parent_id', 0)->get();
-        foreach ($listCategories as $category) {
-            $category['subCategories'] = Category::where('parent_id', $category->id)->get();
-        }
-        // $dumpProductId = DumpProduct::all()->pluck('product_id')->toArray();
-        // $product = Product::whereIn('id', $dumpProductId)->with(['images', 'dumpProducts'])->get();
-        // view()->share('productsInCart', $product);
-        // view()->share('listCategories', $listCategories);
         $this->middleware('guest')->except('logout');
     }
 
-    public function showLoginForm()
-    {
-        $listCategories = Category::where('parent_id', 0)->get();
-        foreach ($listCategories as $category) {
-            $category['subCategories'] = Category::where('parent_id', $category->id)->get();
-        }
-        $dumpProductId = DumpProduct::all()->pluck('product_id')->toArray();
-        $productsInCart = Product::whereIn('id', $dumpProductId)->with(['images', 'dumpProducts'])->get();
-
-        return view('auth.login', compact('listCategories', 'productsInCart'));
-    }
 
     public function logout()
     {
