@@ -20,7 +20,7 @@
                 <div class="col-sm-9">
                     <div class="row">
                         <div class="col-sm-4">
-                            <img src="{{ asset(config('app.link') .$product->image ) }}" alt="" >
+                            <img src="{{ asset(config('app.link') . $product->image ) }}" alt="" >
                         </div>
                         <div class="col-sm-8">
                             <div class="single-item-body">
@@ -50,8 +50,17 @@
                                     <option value="5"></option>
                                 </select>
                                 <a class="add-to-cart" href="{{ route('addToCart') }}"><i class="fa fa-shopping-cart"></i></a>
-                                <div class="clearfix"></div>
-                            </div>
+                                <div class="single-item-options">
+                                    <select class="wc-select" name="size">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                    <a class="add-to-cart" href="{{ route('addToCart')}}"><i class="fa fa-shopping-cart"></i></a>
+                                    <div class="clearfix"></div>
+                                </div>
                         </div>
                     </div>
                     <div class="space40">&nbsp;</div>
@@ -77,7 +86,7 @@
                                 <div class="single-item">
                                     <div class="single-item-header">
                                         <a href="{{ route('detailproduct', $productother->id ) }}">
-                                            <img src="{{ asset(config('app.link') .$productother->image) }}" alt="" class="img__fix"></a>
+                                            <img src="{{ asset(config('app.link') . $productother->image) }}" alt="" class="img__fix"></a>
                                     </div>
                                     <div class="single-item-body">
                                         <p class="single-item-title">{{ $productother->name }}</p>
